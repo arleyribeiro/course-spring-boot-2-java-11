@@ -15,12 +15,12 @@ public class OrdemItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	public OrdemItemPK id = new OrdemItemPK();
+	private OrdemItemPK id = new OrdemItemPK();
 	
 	private Integer quantity;
 	private Double price;
 	
-	private OrdemItem() {
+	public OrdemItem() {
 		
 	}
 
