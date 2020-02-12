@@ -28,7 +28,7 @@ public class Order implements Serializable {
 	private Long id;
 		
 	@OneToMany(mappedBy = "id.order")
-	private Set<OrdemItem> items = new HashSet<>();
+	private Set<OrderItem> items = new HashSet<>();
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd'T'HH:mm:ss'Z'", timezone="GMT")
 	private Instant moment;
@@ -87,7 +87,7 @@ public class Order implements Serializable {
 			this.orderStatus = orderStatus.getCode();
 	}
 	
-	public Set<OrdemItem> getItems() {
+	public Set<OrderItem> getItems() {
 		return items;
 	}	
 
@@ -105,6 +105,13 @@ public class Order implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+	
+	public Double getTotal() {
+		Double total = 0.0;
+		for(OrderItem x : items)
+			total += x.getSubTotal();			
+		return total;
 	}
 
 	@Override
